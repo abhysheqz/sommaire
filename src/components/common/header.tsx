@@ -13,7 +13,7 @@ const Header: React.FC = () => {
           href="/"
           className="flex items-center gap-1 lg:gap-2 shrink-0 group"
         >
-          <FileText className="w-5 h-5 lg:w-5 lg:h-8 text-gray-900 group-hover:rotate-12 transform transition duration-300 ease-in-out" />
+          <FileText className="!size-5 lg:!size-8 text-gray-900 group-hover:rotate-12 transform transition duration-300 ease-in-out" />
           <span className="font-extrabold lg:text-xl text-gray-900">
             Sommaire
           </span>
