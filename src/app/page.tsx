@@ -2,6 +2,7 @@ import BgGradient from "@/components/common/bg-gradient";
 import DemoSection from "@/components/hero/demo-section";
 import HeroSection from "@/components/hero/hero-section";
 import HowItWorksSection from "@/components/hero/how-it-works-section";
+import PricingSection from "@/components/hero/pricing-section";
 import React from "react";
 
 const Home: React.FC = () => {
@@ -12,6 +13,7 @@ const Home: React.FC = () => {
         <HeroSection />
         <DemoSection />
         <HowItWorksSection />
+        <PricingSection />
       </div>
     </div>
   );
