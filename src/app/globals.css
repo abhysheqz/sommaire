@@ -171,3 +171,7 @@
     max-width: 1400px;
   }
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
