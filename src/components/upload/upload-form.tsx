@@ -36,33 +36,19 @@ const UploadForm: React.FC = () => {
       return;
     }
 
-    const uploadPromise = (): Promise<{ name: string }> =>
-      new Promise((resolve, reject) => {
-        startUpload([file as File])
-          .then((resp) => {
-            if (!resp) {
-              reject(new Error("Upload failed to start"));
-              return;
-            }
-            generatePdfSummary(resp).then((data) => {
-              console.log(data);
-              resolve({ name: (file as File).name });
-            });
-          })
-          .catch((err: unknown) => {
-            reject(
-              err instanceof Error ? err : new Error("Unknown upload error")
-            );
-          });
-      });
-
-    toast.promise(uploadPromise(), {
-      loading: "Uploading file...",
-      success: (data) => `${data.name} has been uploaded successfully`,
-      error: (err) => err.message ?? "An error occurred during upload",
-    });
+    toast.promise(
+      (async () => {
+        const resp = await startUpload([file as File]);
+        if (!resp) throw new Error("Upload failed to start");
+        await generatePdfSummary(resp);
+      })(),
+      {
+        loading: "Generating summary...",
+        success: "Generated summary successfully!",
+        error: (err) => err.message ?? "An error occurred during upload",
+      }
+    );
   };
-
   return (
     <div className="flex flex-col gap-8 w-full max-w-2xl mx-auto">
       <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
