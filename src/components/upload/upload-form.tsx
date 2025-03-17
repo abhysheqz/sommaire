@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { useUploadThing } from "@/lib/uploadthing";
 import { toast } from "sonner";
+import { generatePdfSummary } from "@/actions/upload-action";
 
 const schema = z.object({
   file: z
@@ -43,7 +44,10 @@ const UploadForm: React.FC = () => {
               reject(new Error("Upload failed to start"));
               return;
             }
-            resolve({ name: (file as File).name });
+            generatePdfSummary(resp).then((data) => {
+              console.log(data);
+              resolve({ name: (file as File).name });
+            });
           })
           .catch((err: unknown) => {
             reject(
